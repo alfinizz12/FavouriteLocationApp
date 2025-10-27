@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "253842014363",
+    "project_id": "fav-location-notes",
+    "storage_bucket": "fav-location-notes.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:253842014363:android:33e8f271ccd3ef6763c63e",
+        "android_client_info": {
+          "package_name": "com.example.favouritelocationnotesapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjc0_wDL8x3V1SQLyfnnDyQbCfx3lA5e8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
