@@ -20,7 +20,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.favouritelocationnotesapp.LocationNote
+import com.example.favouritelocationnotesapp.Model.LocationNote
 import com.example.favouritelocationnotesapp.R
 import com.example.favouritelocationnotesapp.adapter.LocationNotesAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -32,6 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ListenerRegistration
 import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.firestore
+import androidx.core.net.toUri
 
 class HomeActivity : AppCompatActivity() {
 
@@ -47,7 +48,6 @@ class HomeActivity : AppCompatActivity() {
     private val locationPermissionCode = 1001
     private var currentLatitude: Double? = null
     private var currentLongitude: Double? = null
-
     private var listenerRegistration: ListenerRegistration? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -95,7 +95,7 @@ class HomeActivity : AppCompatActivity() {
                 // open maps
                 if (locationNote.latitude != null && locationNote.longitude != null) {
                     val uri = "https://www.google.com/maps/search/?api=1&query=${locationNote.latitude},${locationNote.longitude}"
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+                    val intent = Intent(Intent.ACTION_VIEW, uri.toUri())
                     startActivity(intent)
                 } else {
                     Toast.makeText(this, "Lokasi tidak tersedia", Toast.LENGTH_SHORT).show()
@@ -103,12 +103,10 @@ class HomeActivity : AppCompatActivity() {
             },
 
             onItemLongClick = { locationNote ->
-                // Call function untuk update
                 showUpdateDialog(locationNote)
             },
 
             onDeleteClick = { locationNote ->
-                //  Open dialog konfirmasi delete
                 AlertDialog.Builder(this)
                     .setTitle("Hapus Lokasi")
                     .setMessage("Anda yakin ingin menghapus '${locationNote.title}'?")
@@ -175,6 +173,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    // pengambilan lokasi saat ini
     private fun getCurrentLocation() {
         val locationManager = getSystemService(Context.LOCATION_SERVICE) as LocationManager
         if (ActivityCompat.checkSelfPermission(
@@ -324,6 +323,4 @@ class HomeActivity : AppCompatActivity() {
         // hapus listener ketika aplikasi close
         listenerRegistration?.remove()
     }
-
-
 }

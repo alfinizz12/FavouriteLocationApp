@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.favouritelocationnotesapp.LocationNote
+import com.example.favouritelocationnotesapp.Model.LocationNote
 import com.example.favouritelocationnotesapp.R
 
 class LocationNotesAdapter(
@@ -19,6 +19,7 @@ class LocationNotesAdapter(
     inner class LocationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val title: TextView = itemView.findViewById(R.id.tvTitle)
         val description: TextView = itemView.findViewById(R.id.tvDescription)
+        val date : TextView = itemView.findViewById(R.id.Date)
         val btnDelete: ImageButton = itemView.findViewById(R.id.btnDelete)
     }
 
@@ -33,6 +34,7 @@ class LocationNotesAdapter(
 
         holder.title.text = location.title
         holder.description.text = location.description
+        holder.date.text = location.createdAt.toString()
 
         // klik untuk buka maps
         holder.itemView.setOnClickListener {
